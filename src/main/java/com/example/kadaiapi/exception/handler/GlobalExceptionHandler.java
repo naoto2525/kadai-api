@@ -1,6 +1,8 @@
 package com.example.kadaiapi.exception.handler;
 
+import com.example.kadaiapi.exception.DogArgumentNotValidException;
 import com.example.kadaiapi.exception.DogNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,7 +13,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DogNotFoundException.class)
     public ResponseEntity<String> handleDogNotFoundException(DogNotFoundException e) {
-//        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+//        return ResponseEntity.notFound().build();
     }
+
+
+    @ExceptionHandler(DogArgumentNotValidException.class)
+    public ResponseEntity<String> handleDogNotFoundException(DogNotFoundException e, HttpServletRequest request) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
 }

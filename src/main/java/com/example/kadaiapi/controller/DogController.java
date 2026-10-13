@@ -3,6 +3,7 @@ package com.example.kadaiapi.controller;
 
 import com.example.kadaiapi.dto.Dog;
 import com.example.kadaiapi.service.DogService;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +49,19 @@ public class DogController {
         return ResponseEntity.ok(dog);
 
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable long id){
+    dogService.delete(id);
 
+    return ResponseEntity.noContent().build();
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Dog> update(@PathVariable long id, @RequestBody Dog dog){
 
+        dogService.update(dog, id);
+
+        return ResponseEntity.ok(dog);
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.kadaiapi.repository;
 
 import com.example.kadaiapi.dto.Dog;
+import com.example.kadaiapi.exception.DogNotFoundException;
 import com.example.kadaiapi.mapper.DogMapper;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,17 @@ public class DogRepository {
     }
     public Dog findById(long id){
         return dogMapper.findById(id);
+    }
+
+    public boolean delete (long id){
+        return dogMapper.delete(id) == 1;
+    }
+
+    public Dog update (Dog dog){
+        if(dogMapper.update(dog) == 0){
+            throw new DogNotFoundException(dog.getId());
+        }
+        return dog;
     }
 }
 
