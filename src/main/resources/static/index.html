@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog API クライアント</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px auto; max-width: 720px; padding: 0 12px; }
+        h1 { font-size: 1.5rem; }
+        h2 { font-size: 1.1rem; margin-top: 28px; }
+        input[type="text"], input[type="number"], textarea {
+            display: block; width: 100%; box-sizing: border-box; margin-bottom: 8px; padding: 6px;
+        }
+        textarea { min-height: 80px; }
+        button { padding: 6px 12px; margin-right: 6px; cursor: pointer; }
+        .dog-item { border: 1px solid #ccc; border-radius: 4px; padding: 10px; margin-bottom: 10px; }
+        .dog-item .actions { margin-top: 8px; }
+        .error { color: #c00; font-weight: bold; min-height: 1.2em; }
+        .message { color: #080; font-weight: bold; min-height: 1.2em; }
+        #found-dog { margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>🐶 Dog API クライアント</h1>
+
+<div id="error-message" class="error"></div>
+<div id="success-message" class="message"></div>
+
+<h2 id="form-heading">1. 新規作成 (POST /api/dogs)</h2>
+<form id="dog-form">
+    <input type="text" id="title" placeholder="タイトル" required>
+    <textarea id="content" placeholder="内容" required></textarea>
+    <button type="submit" id="submit-button">保存</button>
+    <button type="button" id="cancel-button" hidden>編集をキャンセル</button>
+</form>
+
+<hr>
+
+<h2>2. 一覧 (GET /api/dogs)</h2>
+<button type="button" id="reload-button">一覧を更新</button>
+<div id="dogs-list"></div>
+
+<hr>
+
+<h2>3. ID指定の操作</h2>
+<input type="number" id="dog-id" placeholder="IDを入力" value="1" min="1">
+<button type="button" id="find-button">IDで検索 (GET)</button>
+<button type="button" id="delete-button">削除 (DELETE)</button>
+<div id="found-dog"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
